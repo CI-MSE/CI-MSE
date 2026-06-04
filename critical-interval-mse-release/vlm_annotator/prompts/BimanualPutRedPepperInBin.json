@@ -1,0 +1,39 @@
+{
+    "task": "Pick up the red bell pepper from the table and place it into the bin.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the red bell pepper, and its tip is about 3 cm away from the red bell pepper.",
+            "end": "The gripper closes and has just fully gripped the red bell pepper, slightly lifting it up."
+        },
+        {
+            "start": "The red bell pepper is placed on the shelf. The right arm's gripper has not yet grabbed the red bell pepper, and its tip is about 3 cm away from the red bell pepper.",
+            "end": "The right arm's gripper closes and has just fully gripped the red bell pepper, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the red bell pepper and moves it to about 3 cm above the bin.",
+            "end": "The right arm's gripper releases the red bell pepper so that it just lands into the bin."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 200,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the red bell pepper from the table.",
+                    "start": 52,
+                    "end": 76
+                },
+                {
+                    "label": "The right arm grabs the red bell pepper from the shelf.",
+                    "start": 139,
+                    "end": 164
+                },
+                {
+                    "label": "The gripper places the red bell pepper into the bin.",
+                    "start": 174,
+                    "end": 191
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "task": "Push the coaster to the mug.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet touch the coaster, and its tip is about 3 cm away from the coaster.",
+            "end": "The gripper has pushed the coaster to the center of the table."
+        },
+        {
+            "start": "The other gripper has not yet touch the coaster, and its tip is about 3 cm away from the coaster.",
+            "end": "The other gripper has pushed the coaster to the mug."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 200,
+            "intervals": [
+                {
+                    "label": "The gripper pushes the coaster to the center of the table.",
+                    "start": 58,
+                    "end": 122
+                },
+                {
+                    "label": "The other gripper pushes the coaster to the mug.",
+                    "start": 200,
+                    "end": 332
+                }
+            ]
+        }
+    ]
+}

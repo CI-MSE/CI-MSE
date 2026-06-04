@@ -1,0 +1,21 @@
+{
+    "task": "Turn the large container upside down.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet make contact with the large container, and its tip is about 5 cm away from the large container.",
+            "end": "The gripper releases the large container so that it now rests upside down."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 650,
+            "intervals": [
+                {
+                    "label": "The gripper turns the large container upside down.",
+                    "start": 171,
+                    "end": 337
+                }
+            ]
+        }
+    ]
+}

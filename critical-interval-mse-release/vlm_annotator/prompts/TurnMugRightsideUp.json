@@ -1,0 +1,21 @@
+{
+    "task": "Turn the mug right side up.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the mug, and its tip is about 5 cm away from the mug.",
+            "end": "The gripper releases the mug so that it now rests right side up."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 400,
+            "intervals": [
+                {
+                    "label": "The gripper turns the mug right side up.",
+                    "start": 57,
+                    "end": 178
+                }
+            ]
+        }
+    ]
+}

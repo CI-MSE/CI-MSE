@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the green apple from the table and place it on the saucer.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the green apple, and its tip is about 5 cm away from the green apple.",
+            "end": "The gripper closes and has just fully gripped the green apple, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the green apple and about 10 cm away from the saucer.",
+            "end": "The gripper releases the green apple so that it now rests on the saucer."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 600,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the green apple from the table.",
+                    "start": 26,
+                    "end": 49
+                },
+                {
+                    "label": "The gripper places the green apple on the saucer.",
+                    "start": 61,
+                    "end": 76
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the kiwi from the table and place it in the center of the table.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the kiwi, and its tip is about 5 cm away from the kiwi.",
+            "end": "The gripper closes and has just fully gripped the kiwi, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the kiwi and about 10 cm away from the center of the table.",
+            "end": "The gripper releases the kiwi so that it now rests in the center of the table."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 250,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the kiwi from the table.",
+                    "start": 44,
+                    "end": 65
+                },
+                {
+                    "label": "The gripper places the kiwi in the center of the table.",
+                    "start": 73,
+                    "end": 90
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "task": "Pick up the fruits from the bowl and place them on the cutting board.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the first fruit, and its tip is about 3 cm away from the fruit.",
+            "end": "The gripper closes and has just fully gripped the first fruit, slightly lifting it up."
+        },
+        {
+            "start": "The first fruit is placed on the shelf. The right arm's gripper has not yet grabbed the first fruit, and its tip is about 3 cm away from the first fruit.",
+            "end": "The right arm's gripper closes and has just fully gripped the first fruit, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the first fruit and moves it to about 10 cm above the cutting board. Meanwhile, the left arm's gripper has not yet grabbed the second fruit, and its tip is about 3 cm away from the second fruit.",
+            "end": "The right arm's gripper releases the first fruit so that it just lands on the cutting board. Meanwhile, the left arm's gripper closes and has just fully gripped the second fruit, slightly lifting it up."
+        },
+        {
+            "start": "The second fruit is placed on the shelf. The right arm's gripper has not yet grabbed the second fruit, and its tip is about 3 cm away from the second fruit.",
+            "end": "The right arm's gripper closes and has just fully gripped the second fruit, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the second fruit and moves it to about 10 cm above the cutting board.",
+            "end": "The right arm's gripper releases the second fruit so that it just lands on the cutting board."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 1,
+            "intervals": [
+                {
+                    "label": "The left arm grabs the fruit from the bowl.",
+                    "start": 82,
+                    "end": 106
+                },
+                {
+                    "label": "The right arm grabs the fruit from the shelf.",
+                    "start": 155,
+                    "end": 172
+                },
+                {
+                    "label": "The gripper places the fruit on the cutting board. Meanwhile, the left arm grabs the second fruit.",
+                    "start": 183,
+                    "end": 231
+                },
+                {
+                    "label": "The right arm grabs the fruit from the shelf.",
+                    "start": 294,
+                    "end": 317
+                },
+                {
+                    "label": "The right arm places the fruit on the cutting board.",
+                    "start": 330,
+                    "end": 349
+                }
+            ]
+        }
+    ]
+}

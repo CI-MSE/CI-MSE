@@ -1,0 +1,62 @@
+[
+  {
+    "episode": 0,
+    "intervals": [
+      {
+        "label": "The gripper approaches and grabs the apple from the bowl.",
+        "start": 46,
+        "end": 58
+      },
+      {
+        "label": "The right arm's gripper approaches and grabs the apple from the shelf.",
+        "start": 144,
+        "end": 155
+      },
+      {
+        "label": "The gripper moves the apple above the bowl and releases it.",
+        "start": 178,
+        "end": 189
+      }
+    ]
+  },
+  {
+    "episode": 1,
+    "intervals": [
+      {
+        "label": "The gripper grabs the apple from the bowl.",
+        "start": 48,
+        "end": 59
+      },
+      {
+        "label": "The right arm's gripper grabs the apple from the shelf.",
+        "start": 149,
+        "end": 162
+      },
+      {
+        "label": "The right arm's gripper releases the apple into the bin.",
+        "start": 175,
+        "end": 180
+      }
+    ]
+  },
+  {
+    "episode": 2,
+    "intervals": [
+      {
+        "label": "The gripper grabs the apple from the bowl.",
+        "start": 48,
+        "end": 58
+      },
+      {
+        "label": "The right arm's gripper grabs the apple from the shelf.",
+        "start": 145,
+        "end": 162
+      },
+      {
+        "label": "The gripper drops the apple into the bin.",
+        "start": 182,
+        "end": 193
+      }
+    ]
+  }
+]

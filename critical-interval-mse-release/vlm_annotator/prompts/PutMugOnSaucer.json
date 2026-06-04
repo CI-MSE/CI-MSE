@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the mug from the table and place it on the saucer.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the mug, and its tip is about 5 cm away from the mug.",
+            "end": "The gripper closes and has just fully gripped the mug, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the mug and about 10 cm away from the saucer.",
+            "end": "The gripper releases the mug so that it now rests on the saucer."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 280,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the mug from the table.",
+                    "start": 62,
+                    "end": 80
+                },
+                {
+                    "label": "The gripper places the mug on the saucer.",
+                    "start": 88,
+                    "end": 107
+                }
+            ]
+        }
+    ]
+}

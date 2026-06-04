@@ -1,0 +1,21 @@
+{
+    "task": "Turn the cup upside down.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the cup, and its tip is about 5 cm away from the cup.",
+            "end": "The gripper releases the cup so that it now rests upside down."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 300,
+            "intervals": [
+                {
+                    "label": "The gripper turns the cup upside down.",
+                    "start": 67,
+                    "end": 151
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+include LICENSE
+include README.md
+include vlm_annotator/run_vlm_labeller.sh
+recursive-include val_metrics *.md
+recursive-include vlm_annotator *.md
+recursive-include docs/assets *.svg
+recursive-include examples *.h5 *.json
+recursive-include vlm_annotator/prompts *.json

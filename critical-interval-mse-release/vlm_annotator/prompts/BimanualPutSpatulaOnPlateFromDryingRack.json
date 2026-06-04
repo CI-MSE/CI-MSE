@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the spatula from the drying rack and place it on the plate.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the spatula, and its tip is about 3 cm away from the spatula.",
+            "end": "The gripper closes and has just fully gripped the spatula, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the spatula and moves it above the plate.",
+            "end": "The gripper releases the spatula so that it just lands on the plate."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 80,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the spatula from the drying rack.",
+                    "start": 14,
+                    "end": 36
+                },
+                {
+                    "label": "The gripper places the spatula on the plate.",
+                    "start": 51,
+                    "end": 76
+                }
+            ]
+        }
+    ]
+}

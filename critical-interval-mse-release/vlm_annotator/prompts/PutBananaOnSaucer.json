@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the banana from the table and place it on the saucer.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the banana, and its tip is about 5 cm away from the banana.",
+            "end": "The gripper closes and has just fully gripped the banana, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the banana and about 10 cm away from the saucer.",
+            "end": "The gripper releases the banana so that it now rests on the saucer."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 240,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the banana from the table.",
+                    "start": 62,
+                    "end": 94
+                },
+                {
+                    "label": "The gripper places the banana on the saucer.",
+                    "start": 108,
+                    "end": 136
+                }
+            ]
+        }
+    ]
+}

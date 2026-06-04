@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the cereal box from the top of the shelf and place it under the shelf.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the cereal box, and its tip is about 3 cm away from the cereal box.",
+            "end": "The gripper closes and has just fully gripped the cereal box, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the cereal box and about to place it under the shelf.",
+            "end": "The gripper releases the cereal box so that it now rests under the shelf."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 120,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the cereal box from the top of the shelf.",
+                    "start": 29,
+                    "end": 109
+                },
+                {
+                    "label": "The gripper places the cereal box under the shelf.",
+                    "start": 133,
+                    "end": 220
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+    "task": "Pick up the fruit from the bowl and place it into the bin.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the first fruit, and its tip is about 3 cm away from the fruit.",
+            "end": "The gripper closes and has just fully gripped the first fruit, slightly lifting it up."
+        },
+        {
+            "start": "The first fruit is placed on the shelf. The right arm's gripper has not yet grabbed the first fruit, and its tip is about 3 cm away from the first fruit.",
+            "end": "The right arm's gripper closes and has just fully gripped the first fruit, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the first fruit and moves it to about 3 cm above the bin.",
+            "end": "The right arm's gripper releases the first fruit so that it just lands into the bin."
+        },
+        {
+            "start": "The gripper has not yet grabbed the second fruit, and its tip is about 3 cm away from the second fruit.",
+            "end": "The gripper closes and has just fully gripped the second fruit, slightly lifting it up."
+        },
+        {
+            "start": "The second fruit is placed on the shelf. The right arm's gripper has not yet grabbed the second fruit, and its tip is about 3 cm away from the second fruit.",
+            "end": "The right arm's gripper closes and has just fully gripped the second fruit, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the second fruit and moves it to about 3 cm above the bin.",
+            "end": "The right arm's gripper releases the second fruit so that it just lands into the bin."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 40,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the fruit from the bowl.",
+                    "start": 28,
+                    "end": 58
+                },
+                {
+                    "label": "The gripper grabs the fruit from the shelf.",
+                    "start": 114,
+                    "end": 142
+                },
+                {
+                    "label": "The gripper places the fruit into the bin.",
+                    "start": 151,
+                    "end": 169
+                },
+                {
+                    "label": "The gripper grabs the fruit from the bowl.",
+                    "start": 217,
+                    "end": 228
+                },
+                {
+                    "label": "The gripper grabs the fruit from the shelf.",
+                    "start": 306,
+                    "end": 329
+                },
+                {
+                    "label": "The gripper places the fruit into the bin.",
+                    "start": 340,
+                    "end": 359
+                }
+            ]
+        }
+    ]
+}

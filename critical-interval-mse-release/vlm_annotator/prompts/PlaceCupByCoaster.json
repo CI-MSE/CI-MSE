@@ -1,0 +1,30 @@
+{
+    "task": "Pick up the cup from the table and place it by the coaster.",
+    "intervals": [
+        {
+            "start": "The gripper has not yet grabbed the cup, and its tip is about 5 cm away from the cup.",
+            "end": "The gripper closes and has just fully gripped the cup, slightly lifting it up."
+        },
+        {
+            "start": "The gripper is holding the cup and about 10 cm away from the coaster.",
+            "end": "The gripper releases the cup so that it now rests by the coaster."
+        }
+    ],
+    "examples": [
+        {
+            "episode": 160,
+            "intervals": [
+                {
+                    "label": "The gripper grabs the cup from the table.",
+                    "start": 41,
+                    "end": 63
+                },
+                {
+                    "label": "The gripper places the cup by the coaster.",
+                    "start": 69,
+                    "end": 82
+                }
+            ]
+        }
+    ]
+}
