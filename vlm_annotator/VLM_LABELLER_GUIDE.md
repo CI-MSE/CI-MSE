@@ -1,7 +1,18 @@
-# VLM Annotator Guide
+# VLM Annotator Guide (deprecated)
 
-The VLM annotator converts robot demonstration episodes to videos, sends them to
-Gemini or Vertex AI, and stores critical interval annotations as JSON.
+> **Deprecated.** Use the
+> [critical-interval-annotator](../.agents/skills/critical-interval-annotator/SKILL.md)
+> skill for zero-shot critical-interval labeling. Ask the agent to annotate
+> local video files or dataset episodes; see the
+> [README annotation section](../README.md#zero-shot-critical-interval-annotation).
+> The skill writes `annotations.json` with frame-index boundaries for
+> `val_metrics`, plus `annotations_seconds.json`. The Gemini and Vertex AI
+> workflow below is kept for reference and is no longer the supported
+> annotation path.
+
+The deprecated VLM annotator converts robot demonstration episodes to videos,
+sends them to Gemini or Vertex AI, and stores critical interval annotations as
+JSON.
 
 ## Install
 
@@ -52,7 +63,6 @@ python -m vlm_annotator.gemini_annotator \
 | `--demo_type` | `zarr` | `zarr` or `lerobot`. |
 | `--prompt_config` | `vlm_annotator/prompts/PlaceCupByCoaster.json` | Prompt JSON with task and interval descriptions. |
 | `--episode_idx` | `[0, 0]` | Inclusive episode range written as two integers. |
-| `--video_out` | `episode.mp4` | Temporary MP4 path. H.264 output uses the same stem plus `_h264`. |
 | `--downsample` | `3` | Video downsample factor. |
 | `--model` | `gemini-3-pro-preview` | Gemini model name. |
 | `--few_shot` | off | Use prompt examples as few-shot demonstrations. |

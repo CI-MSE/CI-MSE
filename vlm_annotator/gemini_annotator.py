@@ -17,6 +17,7 @@ import json
 import os
 import re
 import subprocess
+import tempfile
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -349,16 +350,18 @@ def gemini_annotator(
             zarr_group=ex_zarr_group,
             dataset=ex_dataset,
         )
-        try:
-            fps = stream.fps
-            example_mp4 = "example_episode.mp4"
-            example_h264 = "example_episode_h264.mp4"
-            episode_to_mp4(stream, example_mp4, downsample=downsample)
-            transcode_to_h264(example_mp4, example_h264)
-        finally:
-            stream.close()
+        with tempfile.TemporaryDirectory(prefix="ci_mse_fewshot_") as tmp_dir:
+            tmp_dir_path = Path(tmp_dir)
+            try:
+                fps = stream.fps
+                example_mp4 = tmp_dir_path / "example_episode.mp4"
+                example_h264 = tmp_dir_path / "example_episode_h264.mp4"
+                episode_to_mp4(stream, str(example_mp4), downsample=downsample)
+                transcode_to_h264(str(example_mp4), str(example_h264))
+            finally:
+                stream.close()
+            example_video_part = _video_part(client, backend, str(example_h264))
         example_msg = few_shot_example_message(_intervals_index_to_sec(ex_intervals, fps))
-        example_video_part = _video_part(client, backend, example_h264)
         one_shot_message.extend([
             example_video_part,
             f"Example episode {ep_idx}.{example_msg}",
@@ -388,7 +391,6 @@ def main():
     parser.add_argument("--demo_type", choices=["zarr", "lerobot"], default="zarr", help="Data format: zarr (UMI) or lerobot.")
     parser.add_argument("--prompt_config", type=str, default="vlm_annotator/prompts/PlaceCupByCoaster.json", help="Path to prompt JSON (task, intervals, optional template and examples).")
     parser.add_argument("--episode_idx", type=str, default="[0, 0]", help="Episode range as Python list, e.g. [179, 237].")
-    parser.add_argument("--video_out", type=str, default="episode.mp4", help="Output mp4 path.")
     parser.add_argument("--downsample", type=int, default=3, help="Downsample factor for video.")
     parser.add_argument("--model", type=str, default="gemini-3-pro-preview", help="Gemini model to use.")
     parser.add_argument("--few_shot", action="store_true", help="Use few-shot prompting; read examples from prompt_config.")
@@ -469,35 +471,40 @@ def main():
             print(f"[INFO] Episode {idx} already completed, skipping.")
             continue
 
-        stream = create_video_stream(args.demo_type, args.demo_path, idx, zarr_group=zarr_group, dataset=dataset)
-        try:
-            episode_to_mp4(stream, args.video_out, downsample=args.downsample)
-        finally:
-            stream.close()
+        with tempfile.TemporaryDirectory(prefix="ci_mse_episode_") as tmp_dir:
+            tmp_dir_path = Path(tmp_dir)
+            mp4_path = tmp_dir_path / f"episode_{idx}.mp4"
+            h264_path = mp4_path.with_name(f"{mp4_path.stem}_h264.mp4")
 
-        h264_path = args.video_out.replace(".mp4", "_h264.mp4")
-        transcode_to_h264(args.video_out, h264_path)
+            stream = create_video_stream(args.demo_type, args.demo_path, idx, zarr_group=zarr_group, dataset=dataset)
+            try:
+                episode_fps = stream.fps
+                episode_to_mp4(stream, str(mp4_path), downsample=args.downsample)
+            finally:
+                stream.close()
 
-        gemini_api_key = os.environ.get("GEMINI_API_KEY", "")
-        response = gemini_annotator(
-            api_key=gemini_api_key,
-            model=args.model,
-            instruction=instruction,
-            h264_path=h264_path,
-            use_few_shot=args.few_shot,
-            prompt_data=prompt_data if args.few_shot else None,
-            demo_type=args.demo_type,
-            demo_path=args.demo_path,
-            zarr_group=zarr_group,
-            dataset=dataset,
-            example_demo_path=example_source,
-            example_zarr_group=example_zarr_group,
-            example_dataset=example_dataset,
-            downsample=args.downsample,
-            backend=args.backend,
-            vertex_project=args.vertex_project,
-            vertex_location=args.vertex_location,
-        )
+            transcode_to_h264(str(mp4_path), str(h264_path))
+
+            gemini_api_key = os.environ.get("GEMINI_API_KEY", "")
+            response = gemini_annotator(
+                api_key=gemini_api_key,
+                model=args.model,
+                instruction=instruction,
+                h264_path=str(h264_path),
+                use_few_shot=args.few_shot,
+                prompt_data=prompt_data if args.few_shot else None,
+                demo_type=args.demo_type,
+                demo_path=args.demo_path,
+                zarr_group=zarr_group,
+                dataset=dataset,
+                example_demo_path=example_source,
+                example_zarr_group=example_zarr_group,
+                example_dataset=example_dataset,
+                downsample=args.downsample,
+                backend=args.backend,
+                vertex_project=args.vertex_project,
+                vertex_location=args.vertex_location,
+            )
 
         with open(results_txt, "a", encoding="utf-8") as f:
             f.write(f"--- Episode {idx} ---\n")
@@ -517,7 +524,7 @@ def main():
             continue
         
         # convert start and end timestamp to index
-        result_intervals = _intervals_sec_to_index(result.get("intervals", []), stream.fps)
+        result_intervals = _intervals_sec_to_index(result.get("intervals", []), episode_fps)
         
         results.append({
             "episode": idx,

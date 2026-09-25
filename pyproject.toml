@@ -34,7 +34,6 @@ anno = [
   "numpy",
   "opencv-python",
   "zarr",
-  "google-genai",
   "lerobot>=0.3.2,<0.4",
 ]
 all = [

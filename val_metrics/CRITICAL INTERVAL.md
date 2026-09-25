@@ -99,3 +99,68 @@ python -m val_metrics.plot_validation_results \
   results/ci_mse_demo_results.txt \
   --output results/plots
 ```
+
+## Training-time LeRobot validation
+
+`LeRobotCriticalIntervalMSE` evaluates CI-MSE inside a training loop without
+writing prediction HDF5 files. The first version supports LeRobotDataset v2.1.
+
+```python
+from val_metrics import (
+    CriticalIntervalMSEConfig,
+    LeRobotCriticalIntervalMSE,
+    LeRobotCriticalIntervalMSEConfig,
+)
+
+metric = LeRobotCriticalIntervalMSE(
+    dataset=val_dataset,
+    intervals_path="critical_intervals.json",
+    config=LeRobotCriticalIntervalMSEConfig(
+        ci_mse_config=CriticalIntervalMSEConfig(ensemble_horizon=4),
+        target_key="action",
+        batch_size=64,
+        device="cuda",
+    ),
+)
+
+result = metric.evaluate(lambda batch: policy.select_action(batch))
+```
+
+`predict_fn(batch)` receives a collated LeRobot batch and must return predicted
+action chunks with shape `[B, H, D]`. The ground-truth target chunks are read
+from `batch["action"]` by default; use `target_key` for custom training batch
+fields.
+
+The metric calls the policy only on required validation indices. For each
+critical interval `[s, t)`, evaluated timesteps are `[s, t)`. If temporal
+ensemble is enabled, the metric also includes the lookback timesteps needed by
+the ensemble:
+
+```text
+lookback = min(ensemble_horizon - 1, H - 1 - horizon_start)
+required indices = [max(0, s - lookback), t)
+```
+
+The returned dict contains `mean`, `median`, `q1`, `q99`, `mean_1_99`,
+`num_timesteps`, `errors`, `episode_ends`, `interval_ends`, `episode_indices`,
+and `episode_spans`.
+
+### Distributed training
+
+Use `evaluate_distributed()` when validation runs inside a
+`torch.distributed` job:
+
+```python
+result = metric.evaluate_distributed(lambda batch: policy.select_action(batch))
+```
+
+If distributed is unavailable or not initialized, this falls back to
+`evaluate()`. Otherwise, each rank predicts `required_indices[rank::world_size]`.
+The metric gathers each rank's global indices, predictions, and targets with
+`torch.distributed.all_gather_object`. Rank 0 restores the dense episode spans
+and computes CI-MSE once. With `broadcast_result=True` (default), scalar summary
+metrics are returned on every rank; raw arrays are returned only on rank 0.
+
+Do not compute CI-MSE independently per rank and average the results. Temporal
+ensemble requires the restored episode timeline, including lookback timesteps
+that may live on another rank.
