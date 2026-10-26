@@ -1,0 +1,4 @@
+interface:
+  display_name: "Critical Interval Annotator"
+  short_description: "Annotate robot-video intervals with isolated agents"
+  default_prompt: "Use $critical-interval-annotator to annotate the critical intervals in these robot manipulation episodes."
